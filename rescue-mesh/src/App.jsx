@@ -15,7 +15,7 @@ function App() {
         if (!msg) return;
         await db.messages.add({
             text: msg,
-            priority: "Pending AI...", // Phase 2 will fill this
+            priority: "Pending AI...",
             timestamp: Date.now(),
             status: "Local",
             location: { lat, lng }, // Store location if available
