@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "./db/db";
+import { useGeolocation } from "./hooks/useGeolocation";
 
 function App() {
     const [msg, setMsg] = useState("");
 
     // This automatically updates the UI when the database changes
     const allMessages = useLiveQuery(() => db.messages.toArray());
+
+    const { lat, lng, error: geoError } = useGeolocation();
 
     const handleSendMessage = async () => {
         if (!msg) return;
@@ -15,6 +18,7 @@ function App() {
             priority: "Pending AI...", // Phase 2 will fill this
             timestamp: Date.now(),
             status: "Local",
+            location: { lat, lng }, // Store location if available
         });
         setMsg("");
     };
