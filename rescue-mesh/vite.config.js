@@ -8,6 +8,12 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: "autoUpdate",
+            devOptions: {
+                enabled: true, // CRITICAL: This allows the PWA to work during 'npm run dev'
+            },
+            workbox: {
+                globPatterns: ["**/*.{js,css,html,ico,png,svg}"], // Files to cache
+            },
             manifest: {
                 name: "RescueMesh AI",
                 short_name: "RescueMesh",
